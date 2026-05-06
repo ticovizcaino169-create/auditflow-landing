@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>AuditFlow</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
@@ -12,42 +13,57 @@
       color: white;
       text-align: center;
     }
+
     header {
       padding: 80px 20px;
     }
+
     h1 {
       font-size: 40px;
       margin-bottom: 20px;
     }
+
     p {
       color: #cbd5f5;
       font-size: 18px;
     }
+
     .btn {
-      margin-top: 20px;
-      padding: 15px 30px;
+      margin-top: 15px;
+      padding: 12px 25px;
       background: #22c55e;
       color: black;
       border: none;
-      font-size: 18px;
+      font-size: 16px;
       cursor: pointer;
       border-radius: 8px;
     }
+
     section {
       padding: 60px 20px;
     }
+
     .cards {
       display: grid;
       gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       max-width: 900px;
       margin: auto;
     }
+
     .card {
       background: #1e293b;
       padding: 20px;
       border-radius: 10px;
     }
+
+    input {
+      padding: 10px;
+      width: 250px;
+      border-radius: 6px;
+      border: none;
+    }
+
     footer {
       padding: 40px;
       color: #94a3b8;
@@ -57,12 +73,19 @@
 
 <body>
 
+<!-- HERO -->
 <header>
   <h1>Controla tu negocio sin perder dinero</h1>
   <p>Analiza ingresos, detecta errores y toma decisiones inteligentes</p>
-  <button class="btn">Empezar ahora</button>
+
+  <form id="form">
+    <input type="email" id="email" placeholder="Tu email" required>
+    <br>
+    <button class="btn" type="submit">Empezar ahora</button>
+  </form>
 </header>
 
+<!-- VALOR -->
 <section>
   <h2>¿Qué puedes analizar?</h2>
   <div class="cards">
@@ -73,6 +96,7 @@
   </div>
 </section>
 
+<!-- COMO FUNCIONA -->
 <section>
   <h2>¿Cómo funciona?</h2>
   <p>1. Te registras</p>
@@ -81,18 +105,72 @@
   <p>4. Recibes resultados claros</p>
 </section>
 
+<!-- PLANES (AQUI VA EL DINERO) -->
 <section>
   <h2>Planes</h2>
-  <p><strong>Básico:</strong> Gratis</p>
-  <p><strong>Pro:</strong> $20 / mes</p>
-  <button class="btn">Suscribirme</button>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Gratis</h3>
+      <p>Funciones básicas</p>
+      <p><strong>$0</strong></p>
+      <button class="btn">Empezar</button>
+    </div>
+
+    <div class="card">
+      <h3>Pro</h3>
+      <p>Reportes + alertas</p>
+      <p><strong>$20 / mes</strong></p>
+      <button class="btn">Suscribirme</button>
+    </div>
+
+    <div class="card">
+      <h3>Business</h3>
+      <p>Control completo + auditoría</p>
+      <p><strong>$49 / mes</strong></p>
+      <button class="btn">Entrar</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section>
+  <h2>Empieza a controlar tu negocio hoy</h2>
+  <button class="btn">Crear cuenta</button>
 </section>
 
 <footer>
   © 2026 AuditFlow
 </footer>
 
-<!-- deploy fix -->
+<!-- SCRIPT REGISTRO -->
+<script>
+document.getElementById("form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+
+  try {
+    const res = await fetch("https://TU-BACKEND.onrender.com/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email })
+    });
+
+    if (res.ok) {
+      alert("Registrado correctamente 🚀");
+    } else {
+      alert("Error al registrar");
+    }
+  } catch (err) {
+    alert("Error de conexión");
+  }
+});
+</script>
 
 </body>
 </html>
