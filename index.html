@@ -2,175 +2,130 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>AuditFlow</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuditFlow</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      text-align: center;
-    }
-
-    header {
-      padding: 80px 20px;
-    }
-
-    h1 {
-      font-size: 40px;
-      margin-bottom: 20px;
-    }
-
-    p {
-      color: #cbd5f5;
-      font-size: 18px;
-    }
-
-    .btn {
-      margin-top: 15px;
-      padding: 12px 25px;
-      background: #22c55e;
-      color: black;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 8px;
-    }
-
-    section {
-      padding: 60px 20px;
-    }
-
-    .cards {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    input {
-      padding: 10px;
-      width: 250px;
-      border-radius: 6px;
-      border: none;
-    }
-
-    footer {
-      padding: 40px;
-      color: #94a3b8;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- HERO -->
-<header>
-  <h1>Controla tu negocio sin perder dinero</h1>
-  <p>Analiza ingresos, detecta errores y toma decisiones inteligentes</p>
+<nav class="navbar">
 
-  <form id="form">
-    <input type="email" id="email" placeholder="Tu email" required>
-    <br>
-    <button class="btn" type="submit">Empezar ahora</button>
-  </form>
-</header>
-
-<!-- VALOR -->
-<section>
-  <h2>¿Qué puedes analizar?</h2>
-  <div class="cards">
-    <div class="card">📊 Finanzas</div>
-    <div class="card">📉 Ganancias y pérdidas</div>
-    <div class="card">⚠️ Errores del negocio</div>
-    <div class="card">📈 Rendimiento</div>
+  <div class="logo">
+    AuditFlow
   </div>
-</section>
 
-<!-- COMO FUNCIONA -->
-<section>
-  <h2>¿Cómo funciona?</h2>
-  <p>1. Te registras</p>
-  <p>2. Subes tus datos</p>
-  <p>3. El sistema analiza</p>
-  <p>4. Recibes resultados claros</p>
-</section>
+  <div class="nav-links">
+    <a href="#">Cómo funciona</a>
+    <a href="#">Planes</a>
+    <a href="#">Contacto</a>
+  </div>
 
-<!-- PLANES (AQUI VA EL DINERO) -->
-<section>
-  <h2>Planes</h2>
+</nav>
 
-  <div class="cards">
+<section class="hero">
 
-    <div class="card">
-      <h3>Gratis</h3>
-      <p>Funciones básicas</p>
-      <p><strong>$0</strong></p>
-      <button class="btn">Empezar</button>
+  <div class="hero-left">
+
+    <h1>
+      Detecta pérdidas financieras antes de que destruyan tu negocio
+    </h1>
+
+    <p>
+      Sube inventarios, facturas o documentos y deja que AuditFlow detecte inconsistencias automáticamente.
+    </p>
+
+    <div class="email-box">
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Ingresa tu email profesional"
+      >
+
+      <button onclick="sendVerification()">
+        Verificar Email
+      </button>
+
     </div>
 
-    <div class="card">
-      <h3>Pro</h3>
-      <p>Reportes + alertas</p>
-      <p><strong>$20 / mes</strong></p>
-      <button class="btn">Suscribirme</button>
-    </div>
+    <div id="verifyContainer" class="hidden">
 
-    <div class="card">
-      <h3>Business</h3>
-      <p>Control completo + auditoría</p>
-      <p><strong>$49 / mes</strong></p>
-      <button class="btn">Entrar</button>
+      <input
+        id="code"
+        placeholder="Código de verificación"
+      >
+
+      <button onclick="verifyCode()">
+        Confirmar
+      </button>
+
     </div>
 
   </div>
+
+  <div class="hero-right">
+
+    <div class="dashboard-card">
+
+      <h3>Dashboard Financiero</h3>
+
+      <div class="metric">
+        <span>Ingresos</span>
+
+        <div class="bar">
+          <div class="fill fill1"></div>
+        </div>
+      </div>
+
+      <div class="metric">
+        <span>Errores detectados</span>
+
+        <div class="bar">
+          <div class="fill fill2"></div>
+        </div>
+      </div>
+
+      <div class="metric">
+        <span>Rendimiento</span>
+
+        <div class="bar">
+          <div class="fill fill3"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
-<!-- CTA FINAL -->
-<section>
-  <h2>Empieza a controlar tu negocio hoy</h2>
-  <button class="btn">Crear cuenta</button>
+<section id="uploadSection" class="upload hidden">
+
+  <h2>Sube tus documentos</h2>
+
+  <p>
+    Inventarios, facturas, tickets o reportes financieros.
+  </p>
+
+  <input type="file" id="fileInput">
+
+  <button onclick="uploadFile()">
+    Analizar Archivo
+  </button>
+
 </section>
 
-<footer>
-  © 2026 AuditFlow
-</footer>
+<section id="resultSection" class="result hidden">
 
-<!-- SCRIPT REGISTRO -->
-<script>
-document.getElementById("form").addEventListener("submit", async function(e) {
-  e.preventDefault();
+  <h2>Resultado del análisis</h2>
 
-  const email = document.getElementById("email").value;
+  <div id="resultData"></div>
 
-  try {
-    const res = await fetch("https://TU-BACKEND.onrender.com/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email })
-    });
+</section>
 
-    if (res.ok) {
-      alert("Registrado correctamente 🚀");
-    } else {
-      alert("Error al registrar");
-    }
-  } catch (err) {
-    alert("Error de conexión");
-  }
-});
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
